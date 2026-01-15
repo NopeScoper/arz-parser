@@ -2,8 +2,8 @@ name: Update Vehicles Data
 
 on:
   schedule:
-    - cron: '0 0 * * 0' # Запуск раз в неделю (в воскресенье)
-  workflow_dispatch: # Кнопка для ручного запуска
+    - cron: '0 0 * * 0' # Раз в неделю
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -22,7 +22,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests beautifulsoup4
+          pip install requests beautifulsoup4 cloudscraper
 
       - name: Run vehicles parser
         run: python vehicles_parser.py
