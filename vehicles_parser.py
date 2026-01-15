@@ -1,38 +1,36 @@
-import requests
+import cloudscraper
 from bs4 import BeautifulSoup
 import json
 import time
 import re
 
-# Базовый URL
+# Настройки
 BASE_URL = "https://arz-wiki.com/arz-rp/vehicles/"
 
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
-}
+# Создаем скрапер, который обходит защиту Cloudflare
+scraper = cloudscraper.create_scraper()
 
 def clean_text(text):
     if not text: return ""
-    # Убираем лишние пробелы и переносы
     return re.sub(r'\s+', ' ', text).strip()
 
 def parse_vehicle_page(url):
     try:
-        response = requests.get(url, headers=HEADERS)
+        # Используем scraper вместо requests
+        response = scraper.get(url)
+        
         if response.status_code != 200:
+            print(f"[-] Ошибка {response.status_code} при открытии машины: {url}")
             return None
         
         soup = BeautifulSoup(response.text, 'html.parser')
         
-        # 1. Название машины (Заголовок H1)
+        # 1. Название
         title = soup.find('h1', class_='entry-title')
         name = clean_text(title.text) if title else "Unknown"
 
-        # 2. Характеристики (обычно в таблице)
+        # 2. Характеристики
         specs = {}
-        
-        # Ищем все строки таблиц
         rows = soup.find_all('tr')
         for row in rows:
             cols = row.find_all(['td', 'th'])
@@ -41,7 +39,6 @@ def parse_vehicle_page(url):
                 val = clean_text(cols[1].text)
                 specs[key] = val
 
-        # Собираем нужные поля из specs (маппинг)
         vehicle_data = {
             'name': name,
             'url': url,
@@ -57,71 +54,79 @@ def parse_vehicle_page(url):
             'files': specs.get('Файлы', '-')
         }
 
-        # 3. Описание (Сертификат, бонусы и т.д.)
-        # Обычно это текст в <div class="entry-content">, исключая таблицу
+        # 3. Описание
         content_div = soup.find('div', class_='entry-content')
         description_lines = []
-        
         if content_div:
+            # Собираем текст, игнорируя таблицы и скрипты
             for elem in content_div.find_all(['p', 'li']):
-                text = clean_text(elem.text)
-                # Исключаем строки, которые похожи на мусор или заголовки
-                if len(text) > 5 and "Cкорость" not in text and "ID машины" not in text:
-                    description_lines.append(text)
+                if not elem.find_parent('table'): # Если элемент не внутри таблицы
+                    text = clean_text(elem.text)
+                    if len(text) > 3 and "Cкорость" not in text:
+                        description_lines.append(text)
         
         vehicle_data['description'] = "\n".join(description_lines)
 
-        print(f"[+] Парсинг: {name} (ID: {vehicle_data['model_id']})")
+        print(f"[+] Успешно: {name}")
         return vehicle_data
 
     except Exception as e:
-        print(f"[-] Ошибка при парсинге {url}: {e}")
+        print(f"[-] Ошибка парсинга {url}: {e}")
         return None
 
 def get_all_vehicles():
     all_vehicles = []
     page = 1
     
+    print("Начинаю парсинг машин с помощью CloudScraper...")
+
     while True:
         if page == 1:
             url = BASE_URL
         else:
             url = f"{BASE_URL}page/{page}/"
             
-        print(f"\n--- Сканирую страницу {page} ---")
+        print(f"\n--- Страница {page} [{url}] ---")
         
         try:
-            response = requests.get(url, headers=HEADERS)
-            if response.status_code == 404:
-                print("Страницы закончились.")
-                break
+            response = scraper.get(url)
             
-            soup = BeautifulSoup(response.text, 'html.parser')
-            
-            # Ищем ссылки на машины (обычно внутри article или h2.entry-title a)
-            articles = soup.find_all('article')
-            
-            if not articles:
-                print("Машины не найдены на странице.")
+            # ДИАГНОСТИКА
+            if response.status_code != 200:
+                print(f"!!! ОШИБКА ДОСТУПА: Код {response.status_code}")
+                # Если 404 - значит страницы кончились
+                if response.status_code == 404:
+                    print("Страницы закончились.")
+                    break
+                # Если 403 - нас заблокировали
                 break
 
-            links_found = 0
-            for article in articles:
-                link_tag = article.find('a', href=True)
-                if link_tag:
-                    vehicle_url = link_tag['href']
-                    # Проверяем, что ссылка ведет на машину, а не на категорию
-                    if "/vehicles/" in vehicle_url and vehicle_url != BASE_URL:
-                        data = parse_vehicle_page(vehicle_url)
-                        if data:
-                            all_vehicles.append(data)
-                            links_found += 1
-                        # Небольшая задержка, чтобы не ддосить сайт
-                        time.sleep(0.2)
+            soup = BeautifulSoup(response.text, 'html.parser')
             
-            if links_found == 0:
-                print("Ссылок на странице больше нет, выход.")
+            # Более широкий поиск ссылок
+            # Ищем любые ссылки, содержащие /vehicles/ в адресе
+            links = soup.find_all('a', href=True)
+            vehicle_links = []
+            
+            for link in links:
+                href = link['href']
+                # Фильтруем ссылки: должны быть на машину, не на страницу, не на категории
+                if "/vehicles/" in href and href != BASE_URL and "/page/" not in href and "/category/" not in href:
+                    if href not in vehicle_links: # Убираем дубликаты
+                        vehicle_links.append(href)
+
+            print(f"Найдено ссылок на странице: {len(vehicle_links)}")
+            
+            if not vehicle_links:
+                print("Машин на странице не найдено. Возможно, конец списка или изменилась верстка.")
                 break
+
+            for v_url in vehicle_links:
+                data = parse_vehicle_page(v_url)
+                if data:
+                    all_vehicles.append(data)
+                # Задержка, чтобы не забанили
+                time.sleep(0.5)
 
             page += 1
             
@@ -129,8 +134,9 @@ def get_all_vehicles():
             print(f"Критическая ошибка: {e}")
             break
 
-    # Сохраняем результат
-    print(f"\nВсего найдено машин: {len(all_vehicles)}")
+    print(f"\nИТОГ: Всего сохранено {len(all_vehicles)} машин.")
+    
+    # Сохраняем, даже если список пустой (чтобы видеть ошибку в файле, если надо)
     with open('vehicles.json', 'w', encoding='utf-8') as f:
         json.dump(all_vehicles, f, ensure_ascii=False, indent=4)
 
