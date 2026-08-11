@@ -297,17 +297,6 @@
         "time_str": "11.08.2026 02:06"
     },
     {
-        "name": "Дополнительные 6 ячеек инвентаря",
-        "category": "Другое",
-        "server": "23",
-        "price_val": 2700,
-        "old_price": 3000,
-        "percent": 10,
-        "currency": "AZ",
-        "display_price": "2700 AZ",
-        "time_str": "11.08.2026 02:07"
-    },
-    {
         "name": "Доска для сёрфа 1",
         "category": "Аксессуары",
         "server": "30",
@@ -328,6 +317,72 @@
         "currency": "AZ",
         "display_price": "5040 AZ",
         "time_str": "11.08.2026 02:07"
+    },
+    {
+        "name": "Заточенная рукоятка",
+        "category": "Другое",
+        "server": "23",
+        "price_val": 5999,
+        "old_price": 8570,
+        "percent": 30,
+        "currency": "Руб.",
+        "display_price": "5999 Руб.",
+        "time_str": "—"
+    },
+    {
+        "name": "Заточенное цевье",
+        "category": "Другое",
+        "server": "23",
+        "price_val": 5999,
+        "old_price": 8570,
+        "percent": 30,
+        "currency": "Руб.",
+        "display_price": "5999 Руб.",
+        "time_str": "—"
+    },
+    {
+        "name": "Заточенный компенсатор",
+        "category": "Другое",
+        "server": "23",
+        "price_val": 5999,
+        "old_price": 8570,
+        "percent": 30,
+        "currency": "Руб.",
+        "display_price": "5999 Руб.",
+        "time_str": "—"
+    },
+    {
+        "name": "Заточенный магазин",
+        "category": "Другое",
+        "server": "23",
+        "price_val": 5999,
+        "old_price": 8570,
+        "percent": 30,
+        "currency": "Руб.",
+        "display_price": "5999 Руб.",
+        "time_str": "—"
+    },
+    {
+        "name": "Заточенный приклад",
+        "category": "Другое",
+        "server": "23",
+        "price_val": 5999,
+        "old_price": 8570,
+        "percent": 30,
+        "currency": "Руб.",
+        "display_price": "5999 Руб.",
+        "time_str": "—"
+    },
+    {
+        "name": "Заточенный прицел",
+        "category": "Другое",
+        "server": "23",
+        "price_val": 5999,
+        "old_price": 8570,
+        "percent": 30,
+        "currency": "Руб.",
+        "display_price": "5999 Руб.",
+        "time_str": "—"
     },
     {
         "name": "Заточка для бронежилета",
@@ -409,7 +464,7 @@
     {
         "name": "Кенгурятник Зомби-Апокалипсиса",
         "category": "Тюнинг",
-        "server": "3, 23",
+        "server": "3",
         "price_val": 8300,
         "old_price": 10000,
         "percent": 17,
@@ -682,6 +737,17 @@
         "time_str": "11.08.2026 02:06"
     },
     {
+        "name": "Нашивка на аксессуар(защита)",
+        "category": "Аксессуары",
+        "server": "23",
+        "price_val": 6560,
+        "old_price": 8000,
+        "percent": 18,
+        "currency": "AZ",
+        "display_price": "6560 AZ",
+        "time_str": "12.08.2026 02:06"
+    },
+    {
         "name": "Нашивка на аксессуар(макс. хп)",
         "category": "Аксессуары",
         "server": "13",
@@ -858,6 +924,17 @@
         "time_str": "11.08.2026 02:06"
     },
     {
+        "name": "Разрешение на получение номера (10 шт)",
+        "category": "Другое",
+        "server": "23",
+        "price_val": 252,
+        "old_price": 350,
+        "percent": 28,
+        "currency": "AZ",
+        "display_price": "252 AZ",
+        "time_str": "12.08.2026 02:06"
+    },
+    {
         "name": "Распределитель лимитки",
         "category": "Тюнинг",
         "server": "15",
@@ -944,17 +1021,6 @@
         "currency": "AZ",
         "display_price": "5325 AZ",
         "time_str": "11.08.2026 02:06"
-    },
-    {
-        "name": "Сертификат BMW M6 2020",
-        "category": "Транспорт",
-        "server": "23",
-        "price_val": 12432,
-        "old_price": 16800,
-        "percent": 26,
-        "currency": "AZ",
-        "display_price": "12432 AZ",
-        "time_str": "11.08.2026 02:07"
     },
     {
         "name": "Сертификат BMW М3 Touring",
@@ -1076,17 +1142,6 @@
         "currency": "AZ",
         "display_price": "18430 AZ",
         "time_str": "11.08.2026 02:06"
-    },
-    {
-        "name": "Современная карта кладов",
-        "category": "Другое",
-        "server": "23",
-        "price_val": 16740,
-        "old_price": 18000,
-        "percent": 7,
-        "currency": "AZ",
-        "display_price": "16740 AZ",
-        "time_str": "11.08.2026 02:07"
     },
     {
         "name": "Стартовый капитал №1",
@@ -1256,13 +1311,13 @@
     {
         "name": "Улучшенный ремень безопасности",
         "category": "Тюнинг",
-        "server": "13",
-        "price_val": 4050,
+        "server": "23",
+        "price_val": 3950,
         "old_price": 5000,
-        "percent": 19,
+        "percent": 21,
         "currency": "AZ",
-        "display_price": "4050 AZ",
-        "time_str": "11.08.2026 02:05"
+        "display_price": "3950 AZ",
+        "time_str": "12.08.2026 02:06"
     },
     {
         "name": "Уэенсдей Аддамс [2022]",
@@ -1333,24 +1388,24 @@
     {
         "name": "Шашка такси (желтая) [деталь тюнинга]",
         "category": "Аксессуары",
-        "server": "23",
-        "price_val": 3285,
+        "server": "6",
+        "price_val": 4455,
         "old_price": 4500,
-        "percent": 27,
+        "percent": 1,
         "currency": "AZ",
-        "display_price": "3285 AZ",
-        "time_str": "11.08.2026 02:07"
+        "display_price": "4455 AZ",
+        "time_str": "11.08.2026 02:06"
     },
     {
         "name": "Шлем «Лич»",
         "category": "Аксессуары",
-        "server": "17",
-        "price_val": 21840,
+        "server": "23",
+        "price_val": 20720,
         "old_price": 28000,
-        "percent": 22,
+        "percent": 26,
         "currency": "AZ",
-        "display_price": "21840 AZ",
-        "time_str": "11.08.2026 02:06"
+        "display_price": "20720 AZ",
+        "time_str": "12.08.2026 02:06"
     },
     {
         "name": "Шлем «Морозный»",
