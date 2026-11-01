@@ -321,13 +321,13 @@
     {
         "name": "Джинкс",
         "category": "Скины",
-        "server": "25",
-        "price_val": 5390,
+        "server": "8",
+        "price_val": 4785,
         "old_price": 5500,
-        "percent": 2,
+        "percent": 13,
         "currency": "AZ",
-        "display_price": "5390 AZ",
-        "time_str": "01.11.2026 02:06"
+        "display_price": "4785 AZ",
+        "time_str": "02.11.2026 02:48"
     },
     {
         "name": "Джон Сина",
@@ -682,6 +682,17 @@
         "time_str": "01.11.2026 02:05"
     },
     {
+        "name": "Маршмеллоу",
+        "category": "Скины",
+        "server": "8",
+        "price_val": 4176,
+        "old_price": 4800,
+        "percent": 13,
+        "currency": "AZ",
+        "display_price": "4176 AZ",
+        "time_str": "02.11.2026 02:48"
+    },
+    {
         "name": "Моноколесо",
         "category": "Аксессуары",
         "server": "26",
@@ -790,6 +801,17 @@
         "currency": "AZ",
         "display_price": "672 AZ",
         "time_str": "01.11.2026 02:06"
+    },
+    {
+        "name": "Нашивка Экономиста",
+        "category": "Другое",
+        "server": "8",
+        "price_val": 1879,
+        "old_price": 1999,
+        "percent": 6,
+        "currency": "Руб.",
+        "display_price": "1879 Руб.",
+        "time_str": "02.11.2026 02:48"
     },
     {
         "name": "Наёмный фермер",
@@ -1221,6 +1243,17 @@
         "time_str": "01.11.2026 02:06"
     },
     {
+        "name": "Табличка «Фрапс пишется»",
+        "category": "Аксессуары",
+        "server": "8",
+        "price_val": 24000,
+        "old_price": 25000,
+        "percent": 4,
+        "currency": "AZ",
+        "display_price": "24000 AZ",
+        "time_str": "02.11.2026 02:48"
+    },
+    {
         "name": "Тайлер Дёрден",
         "category": "Скины",
         "server": "19",
@@ -1351,6 +1384,17 @@
         "currency": "AZ",
         "display_price": "4235 AZ",
         "time_str": "01.11.2026 02:06"
+    },
+    {
+        "name": "Шахтер Мидас",
+        "category": "Аксессуары",
+        "server": "8",
+        "price_val": 182,
+        "old_price": 239,
+        "percent": 24,
+        "currency": "Руб.",
+        "display_price": "182 Руб.",
+        "time_str": "02.11.2026 02:48"
     },
     {
         "name": "Шашка такси (желтая) [деталь тюнинга]",
